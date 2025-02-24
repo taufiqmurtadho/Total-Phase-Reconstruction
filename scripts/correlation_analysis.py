@@ -70,7 +70,7 @@ T_2 = (hbar**2)*mean_density/(atomic_mass_m*kB*coh_length_2)*1e9
 
 #Two-point function
 in_tp_func = in_corr_class.calculate_two_point_function()
-#out_tp_func_1 = out_corr_class_1.calculate_two_point_function()
+out_tp_func_1 = out_corr_class_1.calculate_two_point_function()
 out_tp_func_2 = out_corr_class_2.calculate_two_point_function()
 
 #Plotting
@@ -78,6 +78,7 @@ Dred = np.array([200,43,80])/238
 Dblue = np.array([33,82,135])/238
 bulk_z_grid_n = bulk_z_grid*1e6
 
+"""
 plt.subplot(2,2,1)
 plt.plot(bulk_z_grid_n, in_vertex_slice[10:90], color = 'black', linestyle = '--')
 plt.plot(bulk_z_grid_n, vertex_slice_1, 'x', markersize = 4, color = Dred)
@@ -142,3 +143,53 @@ plt.gcf().set_size_inches(7, 7)
 plt.subplots_adjust(hspace=0.32)
 
 #plt.savefig('main_figs/numerical_results_corr.pdf', format='pdf', dpi=1200)
+"""
+
+#First subplot
+plt.subplot(1, 3, 1)
+mesh1 = plt.pcolormesh(bulk_z_grid_n, bulk_z_grid_n, in_tp_func[10:90, 10:90], cmap=fast_cmap,
+                       rasterized = True)
+plt.clim(0, 8)
+plt.xticks([-40, -20, 0, 20, 40], fontsize=16)
+plt.yticks([-40, -20, 0, 20, 40], fontsize=16)
+plt.xlabel(r'$z\; \rm (\mu m)$', fontsize=18)
+plt.ylabel(r'$z^\prime\; \rm (\mu m)$', fontsize=18)
+ax = plt.gca()
+cbar = plt.colorbar(mesh1, ticks=[0,2, 4,6, 8])
+cbar.ax.tick_params(labelsize=16) 
+ax.text(0.95, 0.95, r'$\mathbf{a}$', transform=ax.transAxes, 
+            fontsize=16, va='top', ha='right', color = 'black')
+
+#Second subplot
+plt.subplot(1, 3, 2)
+
+mesh2 = plt.pcolormesh(bulk_z_grid_n, bulk_z_grid_n, out_tp_func_1, cmap=fast_cmap,
+                       rasterized = True)
+plt.yticks([])
+plt.clim(0, 8)
+plt.xticks([-40, -20, 0, 20, 40], fontsize=16)
+plt.xlabel(r'$z\; \rm (\mu m)$', fontsize=18)
+ax = plt.gca()
+ax.text(0.95, 0.95, r'$\mathbf{b}$', transform=ax.transAxes, 
+            fontsize=16, va='top', ha='right', color = 'black')
+cbar = plt.colorbar(mesh2, ticks=[0,2, 4,6, 8])
+cbar.ax.tick_params(labelsize=16) 
+
+#Third subplot
+plt.subplot(1, 3, 3)
+mesh3 = plt.pcolormesh(bulk_z_grid_n, bulk_z_grid_n, out_tp_func_2, cmap=fast_cmap,
+                       rasterized = True)
+plt.yticks([])
+plt.clim(0, 8)
+plt.xticks([-40, -20, 0, 20, 40], fontsize=16)
+plt.xlabel(r'$z\; \rm (\mu m)$', fontsize=18)
+ax = plt.gca()
+ax.text(0.95, 0.95, r'$\mathbf{c}$', transform=ax.transAxes, 
+            fontsize=16, va='top', ha='right', color = 'black')
+cbar = plt.colorbar(mesh3, ticks=[0,2, 4,6, 8])
+cbar.ax.tick_params(labelsize=16) 
+
+plt.gcf().set_size_inches(12, 4)
+plt.subplots_adjust(bottom = 0.3)
+plt.savefig('main_figs/SM_two_point_funcs_all.pdf', format='pdf', dpi=1200)
+

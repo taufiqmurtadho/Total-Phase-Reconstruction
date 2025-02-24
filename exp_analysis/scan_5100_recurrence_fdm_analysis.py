@@ -83,7 +83,7 @@ Dred = np.array([200,43,80])/238
 Dblue = np.array([33,82,135])/238
 
 plt.subplot(2,2,1)
-plt.pcolormesh(ex_x_grid, ex_z_grid, rho_tof, cmap = fast_cmap)
+plt.pcolormesh(ex_x_grid, ex_z_grid, rho_tof, cmap = fast_cmap, rasterized = True)
 plt.xticks([-60,-30,0,30,60], fontsize = 18)
 plt.yticks([-40,-20,0, 20,40], fontsize = 18)
 plt.xlabel(r'$x\; \rm (\mu m)$', fontsize = 20)
@@ -120,6 +120,7 @@ ax.text(0.95, 0.95, r'$\mathbf{c}$', transform=ax.transAxes,
 
 plt.subplot(2,2,4)
 plt.axvline(0, color = 'black', linestyle='--')
+plt.axhline(11, color = 'black', linestyle = '-.')
 plt.errorbar(evol_time, coh_lengths, yerr=delta_coh_lengths, linestyle = 'none', marker = 'o',
              markersize = 6, capsize =4, color = Dred)
 plt.ylabel(r'$\lambda_{+}\; \rm (\mu m)$', fontsize = 20)
@@ -133,6 +134,6 @@ ax.text(0.95, 0.95, r'$\mathbf{d}$', transform=ax.transAxes,
 plt.subplots_adjust(wspace = 0.25, hspace = 0.3)
 plt.gcf().set_size_inches(10,8.5)
 
-#plt.savefig('figures/scan_5100_fdm_result.pdf', format='pdf', dpi=1200)
+plt.savefig('figures/scan_5100_fdm_result.pdf', format='pdf', dpi=1200)
     
 
