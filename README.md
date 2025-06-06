@@ -2,7 +2,7 @@
 
 This repository contains the source code for simulating total phase reconstruction [1] in adjacent 1D Bose gases from 
 density ripple data after free expansion (time-of-flight [2]). It also contains the code for analyzing selected experimental data:
-relaxation dynamics after driving in Luttinger liquids and non-Gaussian decay and recurrence [3]. Some raw data are not included but
+relaxation dynamics after driving in Luttinger liquids and non-Gaussian decay and recurrence [3]. Raw data are not included but analysis
 can be regenerated with the given scripts. 
 
 **References**<br/>
